@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastrami Nostro - Restaurante Gourmet</title>
+    <style>
+        /* ============================================
+           RESET Y CONFIGURACIÓN BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           ENCABEZADO Y NAVEGACIÓN
+           ============================================ */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 20, 20, 0.95);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            color: #d4af37;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 3px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        /* ============================================
+           SECCIÓN HERO (PRINCIPAL)
+           ============================================ */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6)),
+                        url('imagenes/Inicio.png') no-repeat center center/cover;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 72px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h3 {
+            font-size: 36px;
+            color: #d4af37;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: 2px solid #d4af37;
+            background: transparent;
+            color: #d4af37;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #d4af37;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Elementos decorativos flotantes */
+        .floating-element {
+            position: absolute;
+            height: 100px;
+            border-radius: 50% 40% 60% 50%;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { bottom: 20%; left: 20%; animation-delay: 4s; }
+
+        /* ============================================
+           SECCIÓN ACERCA DE NOSOTROS
+           ============================================ */
+        .about {
+            padding: 120px 50px;
+            background: #141414;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+        }
+
+        .about-content h2 {
+            font-size: 48px;
+            color: #d4af37;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .about-content p {
+            line-height: 1.8;
+            color: #aaa;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Efecto de sal/especias esparcidas */
+        .spice-effect {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* ============================================
+           SECCIÓN MENÚ
+           ============================================ */
+        .menu {
+            padding: 120px 50px;
+            background: #1a1a1a;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .menu-header h2 {
+            font-size: 64px;
+            color: #fff;
+            font-weight: 300;
+            letter-spacing: 4px;
+        }
+
+        .menu-header .underline {
+            width: 100px;
+            height: 2px;
+            background: #d4af37;
+            margin: 20px auto;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .menu-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Alternar posición de imagen y texto */
+        .menu-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .menu-item:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .menu-item-image {
+            position: relative;
+            height: 400px;
+            width: 87%;
+            border-radius: 10%;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+            border: 3px solid #333;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .menu-item-image:hover img {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .menu-item-content h3 {
+            font-size: 48px;
+            color: #d4af37;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .menu-item-content .price {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .menu-item-content p {
+            line-height: 1.8;
+            color: #aaa;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* ============================================
+           SECCIÓN EVENTOS
+           ============================================ */
+        .events {
+            padding: 120px 50px;
+            background: #141414;
+            text-align: center;
+        }
+
+        .events h2 {
+            font-size: 64px;
+            color: #fff;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .events-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .event-info h3 {
+            font-size: 36px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .event-info p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .event-image {
+            height: 400px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+        }
+        .event-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px;
+            margin: 0;
+            background: #000;
+        }
+
+        /* ============================================
+           SECCIÓN RESERVA DE MESA
+           ============================================ */
+        .booking {
+            padding: 120px 50px;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .booking h2 {
+            font-size: 64px;
+            color: #fff;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .booking-image {
+            height: 250px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .booking-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .booking-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Formulario de reserva */
+        .booking-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #222;
+            padding: 40px;
+            border-radius: 10px;
+        }
+
+        .booking-label {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            right: 0;
+            background: rgba(20,20,20,0.7);
+            color: #d4af37;
+            font-weight: bold;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 18px;
+            letter-spacing: 2px;
+            border-radius: 0 0 10px 10px;
+            pointer-events: none;
+        }
+        .booking-image {
+            position: relative; /* Necesario para .booking-label */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #d4af37;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 12px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            color: #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+
+        /* ============================================
+           MAPA
+           ============================================ */
+        .map {
+            padding: 0;
+            background: #141414;
+        }
+        .map h2 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .map-container {
+            height: 400px;
+            background: #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(212, 175, 55, 0.1), transparent),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 51px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255, 255, 255, 0.03) 50px,
+                    rgba(255, 255, 255, 0.03) 51px
+                );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 24px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 50vw;
+            min-height: 300px;
+            max-height: 500px;
+            border: 0;
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .map-container iframe {
+                height: 300px;
+                max-height: none;
+            }
+        }
+
+        /* ============================================
+           PIE DE PÁGINA
+           ============================================ */
+        footer {
+            background: #0d0d0d;
+            padding: 60px 50px 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #888;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            border-color: #d4af37;
+            background: #d4af37;
+            color: #1a1a1a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           MENSAJE DE CIERRE
+           ============================================ */
+        .closing {
+            padding: 100px 50px;
+            background: #1a1a1a;
+            text-align: center;
+        }
+
+        .closing h2 {
+            font-size: 56px;
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+            font-weight: 300;
+        }
+
+        /* ============================================
+           ANIMACIONES
+           ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 48px;
+            }
+
+            .hero h3 {
+                font-size: 24px;
+            }
+
+            .about,
+            .menu-item,
+            .events-content,
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .booking-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-header h2,
+            .events h2,
+            .booking h2 {
+                font-size: 42px;
+            }
+        }
+
+
+        .modal-reserva {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-reserva.activo {
+            display: flex;
+        }
+        .modal-contenido {
+            background: #222;
+            padding: 10px 30px 10px 30px;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 96vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: fadeInUp 0.5s;
+        }
+        .modal-cerrar {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 32px;
+            color: #d4af37;
+            cursor: pointer;
+            font-weight: bold;
+            z-index: 10;
+        }
+        #modalAreaTitulo {
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 22px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Agrega esto justo después de <body> y antes del header -->
+    <div id="carritoSimulado" style="display:none;position:fixed;top:24px;right:32px;z-index:2100;">
+        <button id="btnCarrito" style="background:#222;border:none;border-radius:50%;width:54px;height:54px;box-shadow:0 2px 12px rgba(0,0,0,0.18);cursor:pointer;display:flex;align-items:center;justify-content:center;">
+            <img src="imagenes/carrito.png" alt="Carrito" style="width:32px;height:32px;">
+            <span id="carritoContador" style="position:absolute;top:8px;right:8px;background:#d4af37;color:#222;font-weight:bold;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:14px;">0</span>
+        </button>
+    </div>
+
+    <!-- Modal del carrito -->
+<div id="modalCarrito" class="modal-reserva">
+    <div class="modal-contenido" style="max-width:500px;">
+        <span class="modal-cerrar" id="cerrarModalCarrito">&times;</span>
+        <h2 style="color:#d4af37;text-align:center;margin-bottom:20px;">Tu pedido</h2>
+        <div id="carritoDetalles"></div>
+        <button id="btnRealizarPedido" class="btn" style="width:100%;margin-top:18px;">Realizar pedido</button>
+    </div>
+</div>
+    <!-- ============================================
+         ENCABEZADO CON NAVEGACIÓN
+         ============================================ -->
+    <header>
+        <div class="logo">
+            <img class="logo-icon" src="imagenes/PastramiNostro.png">
+            <div class="logo-text">
+                <h1>Pastrami Nostro</h1>
+                <p>DELICATESSEN</p>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#menu">Menú</a></li>
+                <li><a href="#eventos">Eventos</a></li>
+                <li><a href="#reservar">Reservar</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ============================================
+         SECCIÓN HERO (PRINCIPAL)
+         Presenta el mensaje principal del restaurante
+         ============================================ -->
+    <section id="inicio" class="hero">
+        <!-- Elementos decorativos flotantes -->
+        <img class="floating-element" src="imagenes/mojito.jpg">
+        <img class="floating-element" src="imagenes/piza.png">
+        <img class="floating-element" src="imagenes/Lassagna.jpg">
+        
+        <div class="hero-content">
+            <h2>Que sea el pastrami</h2>
+            <h3>Nuestra pasión</h3>
+            <div class="cta-buttons">
+                <a href="tel:+56932010900" class="btn">📞 Llamar ahora</a>
+                <a href="#reservar" class="btn">Hacer reserva</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECCIÓN ACERCA DE NOSOTROS
+         Cuenta la historia del restaurante
+         ============================================ -->
+    <section id="nosotros" class="about">
+        <div class="about-content">
+            <h2>Acerca de nosotros</h2>
+            <p>
+                En Pastrami Nostro, honramos la tradición centenaria del auténtico Pastrami artesanal. 
+                Cada corte es curado con especias selectas durante 14 días, ahumado lentamente con madera 
+                de cerezo y cocido al vapor para lograr esa textura inigualable.
+            </p>
+            <p>
+                Nuestro compromiso es ofrecer una experiencia gastronómica única donde el Pastrami es 
+                protagonista. Desde el clásico sándwich hasta creaciones innovadoras, cada plato cuenta 
+                una historia de pasión y dedicación.
+            </p>
+            <p>
+                Ubicados en el corazón de la ciudad, nuestro restaurante combina la calidez de una 
+                delicatessen tradicional con la elegancia de un establecimiento contemporáneo.
+            </p>
+        </div>
+        
+        <!-- Imagen decorativa del restaurante -->
+        <div class="about-image">
+            <img src="imagenes/PastramiNostro.png" alt="Pastrami artesanal en tabla de madera">
+            <div class="spice-effect" style="top: -50px; right: -50px;"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECCIÓN MENÚ
+         Muestra los platos principales del restaurante
+         ============================================ -->
+    <section id="menu" class="menu">
+        <div class="menu-header">
+            <h2>Menú</h2>
+            <div class="underline"></div>
+        </div>
+
+        <div class="menu-items">
+            <!-- Item 1: Entradas -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Entradas">
+                    <img src="imagenes/Croquetitas.jpg" alt="Entradas variadas">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Entradas</h3>
+                    <p class="price">Desde $2.990</p>
+                    <p>
+                        Nuestras entradas son el preludio perfecto. Prueba nuestros encurtidos caseros, 
+                        ensalada de col cremosa, rollos de Pastrami con queso crema y alcaparras, o nuestra 
+                        sopa de cebolla gratinada con costrones artesanales.
+                    </p>
+                    <p>
+                        Cada entrada está diseñada para despertar tu paladar y prepararlo para la experiencia completa.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 2: Plato del Chef -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Plato del Chef">
+                    <img src="imagenes/tomakoc2.jpg" alt="Plato especial del chef">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Plato del Chef</h3>
+                    <p class="price">$30.000</p>
+                    <p>
+                        Nuestra creación exclusiva: Pastrami Nostro Especial. 200g de Pastrami premium 
+                        cortado a mano, glaseado con miel de maple y mostaza de grano entero, servido 
+                        sobre puré de papa ahumado y vegetales de temporada al grill.
+                    </p>
+                    <p>
+                        Una explosión de sabores que redefine el concepto de Pastrami gourmet.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 3: Sándwich Clásico -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Clásico">
+                    <img src="imagenes/Clasica.jpg" alt="Sándwich de Pastrami clásico">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Clásico</h3>
+                    <p class="price">$10.000</p>
+                    <p>
+                        El legendario sándwich de Pastrami que nos hizo famosos. Pan de centeno tostado, 
+                        180g de Pastrami cortado fino, mostaza amarilla, y nuestros encurtidos signature. 
+                        Simple, auténtico, inolvidable.
+                    </p>
+                    <p>
+                        Servido con papas fritas crujientes y pepinillos adicionales.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 4: Mar y Tierra -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Mar y Tierra">
+                    <img src="imagenes/mar.jpg" alt="Combinación de mariscos">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Mar y Tierra</h3>
+                    <p class="price">$15.000</p>
+                    <p>
+                        Para los aventureros: Combinamos nuestro Pastrami ahumado con camarones salteados 
+                        en mantequilla de ajo, acompañado de arroz salvaje y espárragos trigueros. 
+                        Una fusión audaz que sorprende al paladar.
+                    </p>
+                    <p>
+                        Incluye papas rústicas al horno con romero.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item 5: Postres -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Postres">
+                    <img src="imagenes/Postres.jpg" alt="Postre gourmet">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Postres</h3>
+                    <p class="price">$10.000</p>
+                    <p>
+                        El final perfecto para tu experiencia. Cheesecake neoyorquino con salsa de frutos 
+                        rojos, brownie de chocolate belga con helado de vainilla, o nuestro strudel de 
+                        manzana casero servido caliente.
+                    </p>
+                    <p>
+                        Todos preparados diariamente en nuestra cocina.
+                    </p>
+                </div>
+            </div>
+
+                        <!-- Item 6: Vinos Y Bebidas -->
+            <div class="menu-item">
+                <div class="menu-item-image" data-menu="Vinos y Bebidas">
+                    <img src="imagenes/vinito.jpg" alt="Vinitos">
+                </div>
+                <div class="menu-item-content">
+                    <h3>Vinos y Bebidas</h3>
+                    <p class="price">$15.000</p>
+                    <p>
+                        Para los aventureros: Combinamos nuestro Pastrami vinos super especiales 
+                        Traidos directamente del sur de chile en nuestros viñedos. 
+                        Una fusión audaz que sorprende al paladar.
+                    </p>
+                </div>
+            </div>  
+        </div>      
+    </section>
+
+    <!-- ============================================
+         SECCIÓN EVENTOS
+         Información sobre eventos especiales y vinos
+         ============================================ -->
+    <section id="eventos" class="events">
+        <h2>Eventos</h2>
+        <div class="events-content">
+            <div class="event-info">
+                <h3>Maridaje & Vino Premium</h3>
+                <p>
+                    Cada viernes y sábado, ofrecemos una experiencia única de maridaje  y cena de 5 tiempos donde nuestro 
+                    sommelier selecciona los mejores vinos para complementar nuestros platos de Pastrami junto al cheft.
+                </p>
+                <p>
+                    Desde tintos robustos hasta blancos frescos, descubre combinaciones que elevan 
+                    cada bocado a una experiencia memorable. Reserva tu mesa para nuestras noches especiales.
+                </p>
+                <p>
+                    También disponible para eventos privados, cumpleaños y celebraciones corporativas.
+                </p>
+                <a href="#reservar" class="btn">Reserva ahora</a>
+            </div>
+            <div class="event-image">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/TqnqKVX2JTI?rel=0" 
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen style="border-radius:10px;display:block;"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         SECCIÓN RESERVA DE MESA
+         Galería del restaurante y formulario de reserva
+         ============================================ -->
+    <section id="reservar" class="booking">
+        <h2>Reserva tu Mesa</h2>
+        
+    <!-- Galería de imágenes del restaurante -->
+    <div class="booking-grid">
+        <div class="booking-image" data-area="Exterior">
+            <img src="imagenes/Exterior.jpg" alt="Exterior del restaurante">
+            <div class="booking-label">Exterior</div>
+        </div>
+        <div class="booking-image" data-area="Comedor">
+            <img src="imagenes/Interior.jpg" alt="Área de comedor">
+            <div class="booking-label">Comedor</div>
+        </div>
+        <div class="booking-image" data-area="Bar">
+            <img src="imagenes/Bar.jpg" alt="Área del bar">
+            <div class="booking-label">Bar</div>
+        </div>
+    </div>
+
+
+    <!-- Modal de reserva -->
+    <div id="modalReserva" class="modal-reserva">
+        <div class="modal-contenido">
+            <span class="modal-cerrar" id="cerrarModal">&times;</span>
+            <h3 id="modalAreaTitulo"></h3>
+            <!-- Formulario de reserva -->
+            <form class="booking-form" id="formReserva" onsubmit="handleBooking(event)">
+                <div class="form-group">
+                    <label for="nombre">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required placeholder="juan@ejemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="+56 9 66037245">
+                </div>
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+                <div class="form-group">
+                    <label for="hora">Hora</label>
+                    <select id="hora" name="hora" required>
+                        <option value="">Selecciona una hora</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">13:00 PM</option>
+                        <option value="14:00">14:00 PM</option>
+                        <option value="15:00">15:00 PM</option>
+                        <option value="16:00">16:00 PM</option>
+                        <option value="17:00">17:00 PM</option>
+                        <option value="18:00">18:00 PM</option>
+                        <option value="19:00">19:00 PM</option>
+                        <option value="20:00">20:00 PM</option>
+                        <option value="21:00">21:00 PM</option>
+                        <option value="22:00">22:00 PM</option>
+                        <option value="23:00">23:00 PM</option>
+                        <option value="00:00">00:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="personas">Número de Personas</label>
+                    <select id="personas" name="personas" required>
+                        <option value="">Selecciona cantidad</option>
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 personas</option>
+                        <option value="6+">6+ personas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comentarios">Comentarios Especiales (Opcional)</label>
+                    <textarea id="comentarios" name="comentarios" rows="4" placeholder="Alergias, ocasión especial, preferencias de mesa..."></textarea>
+                </div>
+                <input type="hidden" id="areaReserva" name="areaReserva">
+                <button type="submit" class="btn" style="width: 100%;">Confirmar Reserva</button>
+            </form>
+        </div>
+    </div>
+
+    </section>
+
+    <!-- ============================================
+         SECCIÓN MAPA
+         Ubicación del restaurante
+         ============================================ -->
+    <section class="map">
+        <h2>📍 Ubicación del Restaurante</h2>
+        <div class="map-container">
+                
+            <div class="map-placeholder">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3344.3476275127264!2d-71.44856469999999!3d-33.0473137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689d9006d237fdb%3A0x77bd1a684e3eff18!2sPastrami%20Nostro!5e0!3m2!1ses!2scl!4v1764561848265!5m2!1ses!2scl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- ============================================
+         MENSAJE DE CIERRE
+         ============================================ -->
+<section class="closing">
+    <h2 style="margin-bottom:40px;">Reseñas de nuestros clientes</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;max-width:1000px;margin:0 auto;">
+        <div style="background:#222;padding:30px 20px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-align:center;">
+            <img src="imagenes/Entrada1.jpg" alt="Pulled Pork" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:12px;">
+            <div style="font-weight:bold;color:#d4af37;font-size:18px;margin-bottom:6px;">Pulled Pork</div>
+            <div style="margin-bottom:10px;">
+                <span style="color:#FFD700;font-size:22px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p style="font-style:italic;color:#d4af37;">"¡El mejor pastrami que he probado! La atención fue excelente y el ambiente muy acogedor."</p>
+            <div style="margin-top:12px;color:#aaa;">— Camila R.</div>
+        </div>
+        <div style="background:#222;padding:30px 20px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-align:center;">
+            <img src="imagenes/lassagna.jpg" alt="Lasagna de brisket" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:12px;">
+            <div style="font-weight:bold;color:#d4af37;font-size:18px;margin-bottom:6px;">Lasagna de brisket</div>
+            <div style="margin-bottom:10px;">
+                <span style="color:#FFD700;font-size:22px;">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+            </div>
+            <p style="font-style:italic;color:#d4af37;">"La lasaña de brisket es espectacular y los postres son un lujo. ¡Volveré pronto!"</p>
+            <div style="margin-top:12px;color:#aaa;">— Felipe G.</div>
+        </div>
+        <div style="background:#222;padding:30px 20px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-align:center;">
+            <img src="imagenes/vinito.jpg" alt="Vinos" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:12px;">
+            <div style="font-weight:bold;color:#d4af37;font-size:18px;margin-bottom:6px;">Vinos</div>
+            <div style="margin-bottom:10px;">
+                <span style="color:#FFD700;font-size:22px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            </div>
+            <p style="font-style:italic;color:#d4af37;">"Excelente experiencia, los vinos y el maridaje fueron lo mejor de la noche."</p>
+            <div style="margin-top:12px;color:#aaa;">— Valentina S.</div>
+        </div>
+    </div>
+
+        <!-- Sección para agregar reseña -->
+    <div style="max-width:1000px;margin:60px auto 0;background:#222;padding:30px 24px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.18);">
+        <h3 style="color:#d4af37;text-align:center;margin-bottom:18px;">Escribe tu reseña</h3>
+        <form id="formResena" enctype="multipart/form-data">
+            <div style="margin-bottom:16px;">
+                <label for="nombreResena" style="color:#d4af37;font-size:14px;">Tu nombre</label>
+                <input type="text" id="nombreResena" name="nombreResena" required style="width:100%;padding:10px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#e0e0e0;">
+            </div>
+            <div style="margin-bottom:16px;">
+                <label for="platoResena" style="color:#d4af37;font-size:14px;">Plato que probaste</label>
+                <input type="text" id="platoResena" name="platoResena" required style="width:100%;padding:10px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#e0e0e0;">
+            </div>
+            <div style="margin-bottom:16px;">
+                <label for="textoResena" style="color:#d4af37;font-size:14px;">Tu reseña</label>
+                <textarea id="textoResena" name="textoResena" rows="4" required style="width:100%;padding:10px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#e0e0e0;"></textarea>
+            </div>
+            <div style="margin-bottom:16px;">
+                <label for="imagenResena" style="color:#d4af37;font-size:14px;">Sube una imagen (opcional)</label>
+                <input type="file" id="imagenResena" name="imagenResena" accept="image/*" style="width:100%;color:#e0e0e0;">
+            </div>
+            <div style="margin-bottom:16px;">
+                <label for="estrellasResena" style="color:#d4af37;font-size:14px;">Calificación</label>
+                <select id="estrellasResena" name="estrellasResena" required style="width:100%;padding:10px;border-radius:6px;border:1px solid #444;background:#1a1a1a;color:#e0e0e0;">
+                    <option value="">Selecciona estrellas</option>
+                    <option value="1">&#9733;</option>
+                    <option value="2">&#9733;&#9733;</option>
+                    <option value="3">&#9733;&#9733;&#9733;</option>
+                    <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
+                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" style="width:100%;">Enviar reseña</button>
+        </form>
+        <div id="previewResena" style="margin-top:24px;"></div>
+    </div>
+</section>
+
+
+
+
+
+
+    <!-- ============================================
+         PIE DE PÁGINA
+         Información de contacto y enlaces
+         ============================================ -->
+    <footer>
+        <div class="footer-content">
+            <!-- Información de contacto -->
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p>📍 Av. Los Carrera</p>
+                <p>2430465, Quilpue Valparaiso</p>
+                <p>📞 +56 9 3201 0900</p>
+                <p>✉️ info@pastraminostro.com</p>
+            </div>
+            
+            <!-- Horarios -->
+            <div class="footer-section">
+                <h3>Horarios</h3>
+                <p>Lunes - Jueves: 12:00 AM - 23:00 PM</p>
+                <p>Viernes - Sábado: 12:00 AM - 00:00 PM</p>
+                <p>Domingo: 12:00 PM - 20:00 PM</p>
+            </div>
+            
+            <!-- Enlaces sociales -->
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <p>Mantente conectado con nosotros en redes sociales</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/pastrami.oficial?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram">📷</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pastrami Nostro. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <!-- Mesero -->
+    <img id="meseroIcono" src="imagenes/Mesero.png" alt="Mesero" style="display:none;position:fixed;bottom:30px;right:30px;width:100px;height:100px;z-index:3000;cursor:pointer;box-shadow:0 4px 24px rgba(0,0,0,0.25);border-radius:50%;background:#fff;padding:8px;">
+
+    <!-- Modal de carta de menú -->
+    <div id="modalCarta" class="modal-reserva">
+        <div class="modal-contenido" id="contenidoCarta">
+            <span class="modal-cerrar" id="cerrarModalCarta">&times;</span>
+            <!-- Aquí se llenará el contenido dinámicamente -->
+        </div>
+    </div>
+
+
+
+    <!-- ============================================
+         JAVASCRIPT PARA INTERACTIVIDAD
+         ============================================ -->
+    <script>
+        // Función para manejar el envío del formulario de reserva
+        function handleBooking(event) {
+            event.preventDefault();
+            
+            // Obtener los datos del formulario
+            const formData = new FormData(event.target);
+            const datos = {
+                nombre: formData.get('nombre'),
+                email: formData.get('email'),
+                telefono: formData.get('telefono'),
+                fecha: formData.get('fecha'),
+                hora: formData.get('hora'),
+                personas: formData.get('personas'),
+                comentarios: formData.get('comentarios')
+            };
+            
+            // Mostrar confirmación al usuario
+            alert(`¡Gracias ${datos.nombre}! Tu reserva para ${datos.personas} personas el ${datos.fecha} a las ${datos.hora} ha sido recibida. Te enviaremos una confirmación a ${datos.email}.`);
+            
+            // Limpiar el formulario
+            event.target.reset();
+            
+            // Mostrar el icono del mesero
+            document.getElementById('meseroIcono').style.display = 'block';
+
+            // En producción, aquí enviarías los datos a un servidor
+            console.log('Datos de reserva:', datos);
+        }
+
+        // Navegación suave al hacer clic en los enlaces del menú
+        document.querySelectorAll('nav a').forEach(enlace => {
+            enlace.addEventListener('click', function(e) {
+                // Solo para enlaces que comienzan con #
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const destino = document.querySelector(this.getAttribute('href'));
+                    if (destino) {
+                        destino.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Efecto parallax suave en el hero
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            }
+        });
+
+        // Animación de aparición al hacer scroll
+        const observador = new IntersectionObserver((entradas) => {
+            entradas.forEach(entrada => {
+                if (entrada.isIntersecting) {
+                    entrada.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observar elementos del menú para animarlos al entrar en vista
+        document.querySelectorAll('.menu-item, .event-info, .booking-form').forEach(elemento => {
+            elemento.style.opacity = '0';
+            observador.observe(elemento);
+        });
+
+        // Establecer fecha mínima en el selector de fecha (hoy)
+        const inputFecha = document.getElementById('fecha');
+        if (inputFecha) {
+            const hoy = new Date().toISOString().split('T')[0];
+            inputFecha.setAttribute('min', hoy);
+        }
+        // MODAL RESERVA
+        document.querySelectorAll('.booking-image').forEach(img => {
+            img.addEventListener('click', function() {
+                const area = this.getAttribute('data-area');
+                document.getElementById('modalReserva').classList.add('activo');
+                document.getElementById('modalAreaTitulo').textContent = `Reserva mesa en área: ${area}`;
+                document.getElementById('areaReserva').value = area;
+            });
+        });
+        document.getElementById('cerrarModal').onclick = function() {
+            document.getElementById('modalReserva').classList.remove('activo');
+        };
+        // Cierra modal al hacer click fuera del contenido
+        document.getElementById('modalReserva').addEventListener('click', function(e) {
+            if (e.target === this) this.classList.remove('activo');
+        });
+
+        // Evento para el icono del mesero
+        document.getElementById('meseroIcono').onclick = function() {
+            alert('Un mesero estará en su mesa pronto');
+        };
+
+
+        // Datos de cada subsección del menú, ahora con varios items por sección
+        const cartasMenu = {
+            "Entradas": {
+                titulo: "Entradas",
+                items: [
+                    { nombre: "Pulled Pork",
+                    descripcion: "Croquetas de Pulled Pork con salsa BBQ.",
+                    precio: "$3.500",
+                    imagen:"imagenes/Entrada1.jpg",
+                    video:"videos/PulledPork.mp4",
+                    resena:"Nuestras croquetas de pulled pork son el aperitivo perfecto, combinando la jugosidad del cerdo desmenuzado con una salsa BBQ casera que te hará querer más.",
+                    estrellas: 4
+                    },
+                
+                    { nombre: "Ensalada de Col Cremosa", 
+                    descripcion: "Col fresca, zanahoria y aderezo especial.",
+                    precio: "$3.500",
+                    imagen:"imagenes/EntradaCremaRepollo.webp",
+                    video:"videos/Tips_para_cortas_repollo.mp4",
+                    resena: "Nuestra ensalada de col es el acompañamiento perfecto para cualquier plato, ofreciendo un equilibrio refrescante y cremoso.",
+                    estrellas: 3 },
+
+                    { nombre: "Rollos de Pastrami", 
+                    descripcion: "Pastrami con queso crema y alcaparras.",
+                    precio: "$4.200",
+                    imagen:"imagenes/RollosdePastromi.jpg",
+                    video:"videos/Rolllospastrami.mp4",
+                    resena: "Ricos Pastrami enrollados en jamón.",
+                    estrellas: 5
+                },
+                    
+                    { nombre: "Langostas", 
+                    descripcion: "Ricas Langostas de mar.",
+                    precio: "$2.500",
+                    imagen:"imagenes/Entrada2.jpg",
+                    video:"videos/Langosta.mp4",
+                    resena: "Deliciosa Langosta a la Parrilla enmantequillada y macelada.",
+                    estrellas: 5
+                },
+
+
+                ]
+            },
+
+            "Plato del Chef": {
+                titulo: "Plato del Chef",
+                items: [
+                    { nombre: "Tomahawk Especial del Chef",
+                    descripcion: "",
+                    precio: "$30.000",  
+                    imagen:"imagenes/Tomakoc.jpg",                  
+                    video:"videos/Tomahowk.mp4",
+                    resena: "Deliciosa Tomahowk a la parilla especialidad del cheft .",
+                    estrellas: 5 }
+                ]
+            },
+
+            "Clásico": {
+                titulo: "Clásico",
+                items: [
+                    { nombre: "Pasta A la Bolognesa",
+                    descripcion: "Deliciosa Pasta en sala de Bolognesa y parmesano.",
+                    precio: "$10.000",
+                    imagen:"imagenes/Fideos1.jpg",
+                    video:"videos/Fideos a la bolognesa.mp4",
+                    resena: "Nuestra pasta a la boloñeza es un clásico que nunca pasa de moda, con una salsa rica y sabrosa que te transporta a Italia en cada bocado.",
+                    estrellas: 4
+                },
+
+
+                    { nombre: "Lasagna de brisket",
+                    descripcion: "Una tradicional lasagna llevado a otro nivel con brisket.",
+                    precio: "$25.500",                    
+                    imagen:"imagenes/lassagna.jpg",
+                    video:"videos/LAsañavideo1.mp4",
+                    resena: "Rica lasaña de autenticos sabores americanos.",
+                    estrellas: 4}
+                ]
+            },
+
+            "Mar y Tierra": {
+                titulo: "Mar y Tierra",
+                items: [
+                    { nombre: "Espaguetti Demare",
+                    descripcion: "delicioso Espagetti con Mariscos y crustaceos.",
+                    precio: "$25.000",                    
+                    imagen:"imagenes/Feturisco.jpg",
+                    video:"videos/Fetuccini.mp4",
+                    resena: "Disfruta e indaga entre los mares de mamamerica y europa con estos deliciosos espaguettis revosados en mariscos y crustaceos .",
+                    estrellas: 4},
+
+                    { nombre: "Paella",
+                    descripcion: "Deliciosa Paella Mixta de españa/america.",
+                    precio: "$25.000",                    
+                    imagen:"imagenes/Pa Ella.jpg",
+                    video:"videos/Paella.mp4",
+                    resena: "No te olvides de probar esta mixta combinación de brisquet y mariscos a la balenciana.",
+                    estrellas: 4}                    
+                    
+                ]
+            },
+
+            "Postres": {
+                titulo: "Postres",
+                items: [
+                    { nombre: "Cheesecake Neoyorquino",
+                    descripcion: "Con salsa de frutos rojos.",
+                    precio: "$10.000",
+                    imagen:"imagenes/Cheescake.jpg",
+                    video:"videos/chesscito.mp4",
+                    resena: "Autenticos Sabores Que envuelven la panacota Convirtiendolo en un plato infaltable para los italianos se parte de nosotros.",
+                    estrellas: 4},
+
+                    { nombre: "Panacota Italiana",
+                    descripcion: "Rica autentica Panacota de Italia.",
+                    precio: "$14.200",
+                    imagen:"imagenes/pancracio.jpg",
+                    video:"videos/panacota.mp4",
+                    resena: "Autenticos Sabores Que envuelven la panacota Convirtiendolo en un plato infaltable para los italianos se parte de nosotros.",
+                    estrellas: 4},
+
+                ]
+            },
+
+            "Vinos y Bebidas": {
+                titulo: "Vinos y Bebidas",
+                items: [
+                    { nombre: "Mojito",
+                    descripcion: "Selección de viñedos del sur de Chile.",
+                    precio: "$6.500",                    
+                    imagen:"imagenes/mojito.jpg",
+                    video:"videos/mojitos.mp4",
+                    resena: "La masceración de lima y menta en su mejor versión.",
+                    estrellas: 4 },
+
+                    { nombre: "Jugos",
+                    descripcion: "Variedad jugos naturales.",
+                    precio: "$2.500",                    
+                    imagen:"imagenes/juguitos.jpg",
+                    video:"videos/jugitos.mp4",
+                    resena: "Frescura total con nuestra selección de jugos naturales.",
+                    estrellas: 4 },
+
+                    { nombre: "Vinos",
+                    descripcion: "Variedad de vinos nacionales e internacionales.",
+                    precio: "$2.500",                    
+                    imagen:"imagenes/Vinitos.jpg",
+                    video:"videos/vinitotinto.mp4",
+                    resena: "Disfruta de nuestra selección de vinos nacionales e internacionales.",
+                    estrellas: 4 }
+                ]
+            }
+        };
+
+        // Mostrar modal de carta al hacer click en imagen del menú
+document.querySelectorAll('.menu-item-image').forEach(img => {
+    img.style.cursor = "pointer";
+    img.addEventListener('click', function() {
+        const menu = this.getAttribute('data-menu');
+        const carta = cartasMenu[menu];
+        if (carta) {
+            // Usamos grid para mostrar hasta 3 items por fila
+            let itemsHtml = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;justify-items:center;">`;
+            carta.items.forEach(item => {
+                itemsHtml += `<div style="background:#181818;padding:20px 16px 16px 16px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.25);width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;">`;
+                // Nombre
+                itemsHtml += `<div style="font-weight:bold;color:#d4af37;font-size:20px;margin-bottom:4px;text-align:center;">${item.nombre}</div>`;
+                // Descripción
+                itemsHtml += `<div style="color:#eee;font-size:16px;margin-bottom:4px;text-align:center;">${item.descripcion}</div>`;
+                // Precio
+                itemsHtml += `<div style="color:#aaa;font-size:18px;margin-bottom:10px;text-align:center;">${item.precio}</div>`;
+                // Imagen y video juntos, uno al lado del otro y siempre abajo
+                if(item.imagen || item.video){
+                    itemsHtml += `<div style="display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:10px;">`;
+                    if(item.imagen){
+                        itemsHtml += `<img src="${item.imagen}" alt="${item.nombre}" style="width:170px; height:180px; object-fit:cover; border-radius:8px;">`;
+                    }
+                    if(item.video && item.video !== "video"){
+                        itemsHtml += `<video controls style="width:170px; height:170px; object-fit:cover; border-radius:8px;background:#000;">
+                                        <source src="${item.video}" type="video/mp4">
+                                        Tu navegador no soporta video.
+                                    </video>`;
+                    }
+                    itemsHtml += `</div>`;
+                }
+                // Estrellas de clasificación (centradas, arriba de la reseña)
+                if(item.estrellas){
+                    itemsHtml += `<div style="text-align:center;margin-bottom:6px;">`;
+                    for(let i=1; i<=5; i++){
+                        itemsHtml += `<span style="color:${i<=item.estrellas ? '#FFD700' : '#555'};font-size:22px;">&#9733;</span>`;
+                    }
+                    itemsHtml += `</div>`;
+                }
+                // Reseña (si existe)
+                if(item.resena){
+                    itemsHtml += `<div style="color:#d4af37;font-style:italic;font-size:15px;text-align:center;">${item.resena}</div>`;
+                }
+                itemsHtml += `</div>`;
+            });
+            itemsHtml += '</div>';
+
+            document.getElementById('contenidoCarta').innerHTML = `
+                <span class="modal-cerrar" id="cerrarModalCarta">&times;</span>
+                <h2 style="color:#d4af37;text-align:center;margin-bottom:20px;">${carta.titulo}</h2>
+                ${itemsHtml}
+            `;
+            document.getElementById('modalCarta').classList.add('activo');
+            // Cerrar modal al hacer click en la X
+            document.getElementById('cerrarModalCarta').onclick = function() {
+                document.getElementById('modalCarta').classList.remove('activo');
+            };
+        }
+    });
+});
+
+document.getElementById('formResena').onsubmit = function(e) {
+    e.preventDefault();
+    const nombre = document.getElementById('nombreResena').value;
+    const plato = document.getElementById('platoResena').value;
+    const texto = document.getElementById('textoResena').value;
+    const estrellas = document.getElementById('estrellasResena').value;
+    const imagenInput = document.getElementById('imagenResena');
+    let imagenHtml = '';
+    if(imagenInput.files && imagenInput.files[0]){
+        const reader = new FileReader();
+        reader.onload = function(evt){
+            imagenHtml = `<img src="${evt.target.result}" alt="Foto reseña" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:12px;">`;
+            mostrarPreview();
+        };
+        reader.readAsDataURL(imagenInput.files[0]);
+    } else {
+        mostrarPreview();
+    }
+    function mostrarPreview(){
+        document.getElementById('previewResena').innerHTML = `
+            <div style="background:#222;padding:30px 20px;border-radius:14px;box-shadow:0 2px 16px rgba(0,0,0,0.18);text-align:center;">
+                ${imagenHtml}
+                <div style="font-weight:bold;color:#d4af37;font-size:18px;margin-bottom:6px;">${plato}</div>
+                <div style="margin-bottom:10px;">
+                    <span style="color:#FFD700;font-size:22px;">${'&#9733;'.repeat(estrellas)}</span>
+                </div>
+                <p style="font-style:italic;color:#d4af37;">"${texto}"</p>
+                <div style="margin-top:12px;color:#aaa;">— ${nombre}</div>
+            </div>
+        `;
+    }
+};
+
+let carrito = [];
+function agregarAlCarrito(item) {
+    carrito.push(item);
+    document.getElementById('carritoSimulado').style.display = 'block';
+    document.getElementById('carritoContador').textContent = carrito.length;
+    alert(`"${item.nombre}" agregado al carrito.`);
+}
+
+// Mostrar el modal del carrito al hacer click en el botón
+document.getElementById('btnCarrito').onclick = function() {
+    mostrarCarrito();
+    document.getElementById('modalCarrito').classList.add('activo');
+};
+
+// Cerrar el modal del carrito
+document.getElementById('cerrarModalCarrito').onclick = function() {
+    document.getElementById('modalCarrito').classList.remove('activo');
+};
+document.getElementById('modalCarrito').addEventListener('click', function(e) {
+    if (e.target === this) this.classList.remove('activo');
+});
+
+// Función para mostrar los detalles del carrito
+function mostrarCarrito() {
+    const contenedor = document.getElementById('carritoDetalles');
+    if (carrito.length === 0) {
+        contenedor.innerHTML = `<p style="color:#aaa;text-align:center;">No has agregado ningún producto.</p>`;
+        document.getElementById('btnRealizarPedido').style.display = 'none';
+        return;
+    }
+    let total = 0;
+    let html = '<ul style="list-style:none;padding:0;">';
+    carrito.forEach((item, idx) => {
+        let precioNum = parseInt(item.precio.replace(/[^0-9]/g, ''));
+        total += isNaN(precioNum) ? 0 : precioNum;
+        html += `
+            <li style="margin-bottom:22px;border-bottom:1px solid #333;padding-bottom:12px;position:relative;">
+                <div style="display:flex;align-items:center;gap:14px;">
+                    ${item.imagen ? `<img src="${item.imagen}" alt="${item.nombre}" style="width:54px;height:54px;object-fit:cover;border-radius:8px;">` : ''}
+                    <div>
+                        <div style="font-weight:bold;color:#d4af37;font-size:17px;">${item.nombre}</div>
+                        <div style="color:#eee;font-size:15px;">${item.descripcion}</div>
+                        <div style="color:#aaa;font-size:15px;">${item.precio}</div>
+                    </div>
+                </div>
+                <button onclick="eliminarDelCarrito(${idx})" title="Eliminar" style="position:absolute;top:8px;right:8px;background:none;border:none;color:#d4af37;font-size:22px;cursor:pointer;">&times;</button>
+            </li>
+        `;
+    });
+    html += '</ul>';
+    html += `<div style="font-weight:bold;color:#d4af37;font-size:20px;text-align:right;margin-top:10px;">Total: $${total.toLocaleString()}</div>`;
+    contenedor.innerHTML = html;
+    document.getElementById('btnRealizarPedido').style.display = 'block';
+}
+
+// Nueva función para eliminar un item del carrito
+function eliminarDelCarrito(idx) {
+    carrito.splice(idx, 1);
+    document.getElementById('carritoContador').textContent = carrito.length;
+    mostrarCarrito();
+    if (carrito.length === 0) {
+        document.getElementById('modalCarrito').classList.remove('activo');
+        document.getElementById('carritoSimulado').style.display = 'none';
+    }
+}
+
+// Botón para simular compra y vaciar el carrito
+document.getElementById('btnRealizarPedido').onclick = function() {
+    if (carrito.length === 0) return;
+    alert('¡Gracias por tu compra! Tu pedido está en preparación.');
+    carrito = [];
+    document.getElementById('carritoContador').textContent = '0';
+    mostrarCarrito();
+    document.getElementById('modalCarrito').classList.remove('activo');
+    document.getElementById('carritoSimulado').style.display = 'none';
+    mostrarTemporizador(0.1 * 60); // 30 minutos en segundos
+};
+
+// Temporizador de 30 minutos abajo a la derecha
+function mostrarTemporizador(segundos) {
+    let timerDiv = document.getElementById('temporizadorPedido');
+    if (!timerDiv) {
+        timerDiv = document.createElement('div');
+        timerDiv.id = 'temporizadorPedido';
+        timerDiv.style.position = 'fixed';
+        timerDiv.style.bottom = '30px';
+        timerDiv.style.right = '30px';
+        timerDiv.style.background = '#222';
+        timerDiv.style.color = '#d4af37';
+        timerDiv.style.padding = '18px 28px';
+        timerDiv.style.borderRadius = '12px';
+        timerDiv.style.fontSize = '22px';
+        timerDiv.style.fontWeight = 'bold';
+        timerDiv.style.zIndex = '4000';
+        timerDiv.style.boxShadow = '0 4px 24px rgba(0,0,0,0.25)';
+        timerDiv.style.textAlign = 'center';
+        document.body.appendChild(timerDiv);
+    }
+    timerDiv.style.display = 'block';
+
+    function formatTime(s) {
+        const m = Math.floor(s / 60);
+        const ss = s % 60;
+        return `${m.toString().padStart(2, '0')}:${ss.toString().padStart(2, '0')}`;
+    }
+
+    timerDiv.textContent = `⏳ Tu pedido estará listo en: ${formatTime(segundos)}`;
+
+    if (window.temporizadorInterval) clearInterval(window.temporizadorInterval);
+    window.temporizadorInterval = setInterval(() => {
+        segundos--;
+        timerDiv.textContent = `⏳ Tu pedido estará listo en: ${formatTime(segundos)}`;
+        if (segundos <= 0) {
+            clearInterval(window.temporizadorInterval);
+            timerDiv.innerHTML = `
+                <div>El mesero ya está por llegar</div>
+                <img id="meseroTemporizador" src="imagenes/Mesero.png" alt="Mesero" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-top:12px;cursor:pointer;">
+            `;
+            // Mostrar el mesero también abajo a la derecha
+            const meseroImg = document.getElementById('meseroTemporizador');
+            if (meseroImg) {
+                meseroImg.onclick = function() {
+                    alert('Un mesero estará en su mesa pronto');
+                };
+            }
+            setTimeout(() => { timerDiv.style.display = 'none'; }, 15000);
+        }
+    }, 1000);
+}
+
+
+
+document.querySelectorAll('.menu-item-image').forEach(img => {
+    img.style.cursor = "pointer";
+    img.addEventListener('click', function() {
+        const menu = this.getAttribute('data-menu');
+        const carta = cartasMenu[menu];
+        if (carta) {
+            let itemsHtml = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;justify-items:center;">`;
+            carta.items.forEach((item, idx) => {
+                itemsHtml += `<div style="background:#181818;padding:20px 16px 16px 16px;border-radius:12px;box-shadow:0 2px 16px rgba(0,0,0,0.25);width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;">`;
+                itemsHtml += `<div style="font-weight:bold;color:#d4af37;font-size:20px;margin-bottom:4px;text-align:center;">${item.nombre}</div>`;
+                itemsHtml += `<div style="color:#eee;font-size:16px;margin-bottom:4px;text-align:center;">${item.descripcion}</div>`;
+                itemsHtml += `<div style="color:#aaa;font-size:18px;margin-bottom:10px;text-align:center;">${item.precio}</div>`;
+                if(item.imagen || item.video){
+                    itemsHtml += `<div style="display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:10px;">`;
+                    if(item.imagen){
+                        itemsHtml += `<img src="${item.imagen}" alt="${item.nombre}" style="width:170px; height:180px; object-fit:cover; border-radius:8px;">`;
+                    }
+                    if(item.video && item.video !== "video"){
+                        itemsHtml += `<video controls style="width:170px; height:170px; object-fit:cover; border-radius:8px;background:#000;">
+                                        <source src="${item.video}" type="video/mp4">
+                                        Tu navegador no soporta video.
+                                    </video>`;
+                    }
+                    itemsHtml += `</div>`;
+                }
+                if(item.estrellas){
+                    itemsHtml += `<div style="text-align:center;margin-bottom:6px;">`;
+                    for(let i=1; i<=5; i++){
+                        itemsHtml += `<span style="color:${i<=item.estrellas ? '#FFD700' : '#555'};font-size:22px;">&#9733;</span>`;
+                    }
+                    itemsHtml += `</div>`;
+                }
+                if(item.resena){
+                    itemsHtml += `<div style="color:#d4af37;font-style:italic;font-size:15px;text-align:center;">${item.resena}</div>`;
+                }
+                itemsHtml += `<button onclick="agregarAlCarrito(cartasMenu['${menu}'].items[${idx}])" style="margin-top:12px;padding:8px 24px;background:#d4af37;color:#222;border:none;border-radius:6px;cursor:pointer;font-weight:bold;">Agregar al carrito</button>`;
+                itemsHtml += `</div>`;
+            });
+            itemsHtml += '</div>';
+
+            document.getElementById('contenidoCarta').innerHTML = `
+                <span class="modal-cerrar" id="cerrarModalCarta">&times;</span>
+                <h2 style="color:#d4af37;text-align:center;margin-bottom:20px;">${carta.titulo}</h2>
+                ${itemsHtml}
+            `;
+            document.getElementById('modalCarta').classList.add('activo');
+            document.getElementById('cerrarModalCarta').onclick = function() {
+                document.getElementById('modalCarta').classList.remove('activo');
+            };
+        }
+    });
+});
+    </script>
+</body>
+</html>
